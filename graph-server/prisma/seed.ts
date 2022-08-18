@@ -1,25 +1,24 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
-async function main(){
-    await prisma.donation.deleteMany()
-    const alice = await prisma.donation.create({
-        data:{
-            email:'alisce@prisma.io',
-            displayedName:'Alice',
-            count:5
-        }
-    });
-    console.log({alice});
-    
+async function main() {
+  await prisma.donation.deleteMany();
+  const alice = await prisma.donation.create({
+    data: {
+      email: 'alisce@prisma.io',
+      displayedName: 'Alice',
+      count: 5,
+    },
+  });
+  console.log({ alice });
 }
 
 main()
-    .catch(e=>{
-        console.error(e)
-        process.exit(1);
-    })
-    .finally(async ()=>{
-        await prisma.$disconnect();
-    })
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

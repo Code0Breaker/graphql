@@ -4,7 +4,7 @@ type Donation {
   id:Int!
   count: Int!
   displayedName:String!
-  email:String
+  email:String!
   mobile:String
   team:String
   message:String
@@ -12,16 +12,34 @@ type Donation {
 }
 
 input CreateDonationInput {
-  # Example field (placeholder)
-  exampleField: Int
+  count: Int!
+  displayedName:String!
+  email:String!
+  mobile:String
+  team:String
+  message:String
+  createdAt:DateTime
 }
 
+input OrderByParams{
+  field: String
+  direction: String
+}
 
 type Query {
-  donations: [Donation]!
+  donations(orderBy:OrderByParams): [Donation]!
   donation(id: Int!): Donation
+  totalDonations: Int!
 }
 
 type Mutation {
   createDonation(createDonationInput: CreateDonationInput!): Donation!
+}
+
+type Result{
+  total: Int!
+}
+
+type Subscription{
+  totalUpdated: Result
 }
